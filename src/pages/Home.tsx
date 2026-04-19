@@ -30,7 +30,9 @@ export default function Home() {
 
       const data = await response.json();
 
-      const evidenceRating = Math.floor(Math.random() * 30) + 70;
+      const evidenceRating = typeof data.evidenceRating === 'number'
+        ? Math.min(100, Math.max(1, data.evidenceRating))
+        : Math.floor(Math.random() * 30) + 70; // fallback if API omits field
       const slug = generateSlug(data.headline);
 
       const generatedArticle: GeneratedArticle = {
@@ -55,6 +57,7 @@ export default function Home() {
             subheadline: data.subheadline,
             body: data.body,
             sources: data.sources,
+            evidence_rating: evidenceRating,
             category,
             intensity,
             topic,

@@ -46,8 +46,11 @@ Return ONLY valid JSON (no markdown, no code blocks) with exactly these fields:
     "First fake absurd citation",
     "Second fake absurd citation",
     "Third fake absurd citation"
-  ]
-}`;
+  ],
+  "evidenceRating": 85
+}
+
+evidenceRating must be an integer from 1 to 100 representing how "undeniably proven" this conspiracy feels. Higher intensity topics should score higher (70-99). Lower intensity topics can score lower (30-69). Never return 0 or 100 exactly.`;
 
     const message = await client.messages.create({
       model: 'claude-3-5-haiku-20241022',
